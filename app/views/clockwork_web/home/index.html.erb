@@ -82,7 +82,7 @@
         <tbody>
           <% @events.each do |event| %>
             <% enabled = !@disabled.include?(event.job) %>
-            <tr class="<%= enabled ? "" : "disabled" %>">
+            <tr class="<%= enabled ? '' : 'disabled' %>">
               <td><%= event.job %></td>
               <td>
                 <%= friendly_period(event.instance_variable_get(:@period)) %>
@@ -95,7 +95,7 @@
                 <% end %>
               </td>
               <td><%= last_run(@last_runs[event.job]) %></td>
-              <td><%= button_to enabled ? "Disable" : "Enable", home_job_path(job: event.job, enable: !enabled), disabled: !ClockworkWeb.redis %></td>
+              <td><%= button_to enabled ? 'Disable' : 'Enable', home_job_path(job: event.job, enable: !enabled), disabled: !ClockworkWeb.redis %></td>
             </tr>
           <% end %>
         </tbody>

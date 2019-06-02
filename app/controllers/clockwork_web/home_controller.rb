@@ -3,7 +3,7 @@ module ClockworkWeb
     layout false
     helper ClockworkWeb::HomeHelper
 
-    http_basic_authenticate_with name: ENV["CLOCKWORK_USERNAME"], password: ENV["CLOCKWORK_PASSWORD"] if ENV["CLOCKWORK_PASSWORD"]
+    http_basic_authenticate_with name: ENV['CLOCKWORK_USERNAME'], password: ENV['CLOCKWORK_PASSWORD'] if ENV['CLOCKWORK_PASSWORD']
 
     def index
       @events =
@@ -19,12 +19,12 @@ module ClockworkWeb
 
       @last_runs = ClockworkWeb.last_runs
       @disabled = ClockworkWeb.disabled_jobs
-      @last_heartbeat = ClockworkWeb.last_heartbeat
+      @last_heartbeat = ClockworkWeb.last_heartbeat.in_time_zone
     end
 
     def job
       job = params[:job]
-      enable = params[:enable] == "true"
+      enable = params[:enable] == 'true'
       if enable
         ClockworkWeb.enable(job)
       else
